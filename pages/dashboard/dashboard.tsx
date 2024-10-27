@@ -23,7 +23,7 @@ import {
 } from "@/components/dashboard/charts";
 import { generateMockData } from "@/lib/mock-data-generator";
 
-export const DashboardPage = () => {
+const DashboardPage = () => {
   const [data, setData] = useState<SystemData | null>(null);
 
   useEffect(() => {
@@ -131,3 +131,5 @@ export const DashboardPage = () => {
     </div>
   );
 };
+
+export default DashboardPage;
