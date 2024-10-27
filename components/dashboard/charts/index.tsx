@@ -38,7 +38,7 @@ const COLORS = [
 ];
 
 const ChartSize = {
-  width: 500,
+  width: 400,
   height: 300,
 };
 
@@ -253,7 +253,11 @@ export const PerformanceMetrics = ({
       Icon={<Network className="h-4 w-4" />}
       {...rest}
     >
-      <ComposedChart data={performanceMetrics} width={500} height={300}>
+      <ComposedChart
+        data={performanceMetrics}
+        width={ChartSize.width}
+        height={ChartSize.height}
+      >
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis dataKey="name" />
         <YAxis yAxisId="left" />
@@ -290,7 +294,11 @@ export const SecurityEvents = ({
       Icon={<Network className="h-4 w-4" />}
       {...rest}
     >
-      <BarChart data={securityEvents} width={500} height={300}>
+      <BarChart
+        data={securityEvents}
+        width={ChartSize.width}
+        height={ChartSize.height}
+      >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -343,7 +351,11 @@ export const LoadBalancerMetrics = ({
       Icon={<Network className="h-4 w-4" />}
       {...rest}
     >
-      <AreaChart data={loadBalancer} width={500} height={300}>
+      <AreaChart
+        data={loadBalancer}
+        width={ChartSize.width}
+        height={ChartSize.height}
+      >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="time" />
         <YAxis />
@@ -467,8 +479,8 @@ export const BandwidthUsage = ({
       {...rest}
     >
       <TreeMap
-        width={500}
-        height={300}
+        width={ChartSize.width}
+        height={ChartSize.height}
         data={bandwidthUsage}
         dataKey="size"
         ratio={4 / 3}
