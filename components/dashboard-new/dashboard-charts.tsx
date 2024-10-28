@@ -39,6 +39,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import DashboardChartCard from "@/components/dashboard/chart-card";
+import { Component } from "@/components/dashboard-new/test-chart";
 
 const locationData = [
   { name: "New York", value: 5, fullMark: 10 },
@@ -136,6 +137,8 @@ const ChartColors = {
 };
 
 export default function HarmonyDashboardCharts() {
+  // return <Component />;
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <DashboardChartCard
@@ -156,8 +159,8 @@ export default function HarmonyDashboardCharts() {
             cy="50%"
             outerRadius="80%"
             data={locationData}
-            width={ChartSize.width}
-            height={ChartSize.height}
+            // width={ChartSize.width}
+            // height={ChartSize.height}
           >
             <PolarGrid />
             <PolarAngleAxis dataKey="name" />
@@ -185,7 +188,9 @@ export default function HarmonyDashboardCharts() {
           },
         }}
       >
-        <PieChart width={ChartSize.width} height={ChartSize.height}>
+        <PieChart
+        // width={ChartSize.width} height={ChartSize.height}
+        >
           <Pie
             data={serverData}
             dataKey="value"
@@ -228,8 +233,8 @@ export default function HarmonyDashboardCharts() {
           outerRadius="80%"
           barSize={10}
           data={workstationData}
-          width={300}
-          height={ChartSize.height}
+          // width={300}
+          // height={ChartSize.height}
         >
           <RadialBar
             minAngle={15}
@@ -261,7 +266,9 @@ export default function HarmonyDashboardCharts() {
           },
         }}
       >
-        <PieChart width={ChartSize.width} height={ChartSize.height}>
+        <PieChart
+        //  width={ChartSize.width} height={ChartSize.height}
+        >
           <Pie
             data={userData}
             dataKey="value"
@@ -302,8 +309,8 @@ export default function HarmonyDashboardCharts() {
           outerRadius="80%"
           barSize={10}
           data={cloudOpsData}
-          width={ChartSize.width}
-          height={ChartSize.height}
+          // width={ChartSize.width}
+          // height={ChartSize.height}
         >
           <RadialBar
             minAngle={15}
@@ -334,7 +341,9 @@ export default function HarmonyDashboardCharts() {
           },
         }}
       >
-        <PieChart width={ChartSize.width} height={ChartSize.height}>
+        <PieChart
+        // width={ChartSize.width} height={ChartSize.height}
+        >
           <Pie
             data={backupData}
             dataKey="value"
@@ -372,8 +381,8 @@ export default function HarmonyDashboardCharts() {
         <BarChart
           data={threatData}
           layout="vertical"
-          width={ChartSize.width}
-          height={ChartSize.height}
+          // width={ChartSize.width}
+          // height={ChartSize.height}
         >
           <XAxis type="number" />
           <YAxis dataKey="name" type="category" />
@@ -395,7 +404,9 @@ export default function HarmonyDashboardCharts() {
           },
         }}
       >
-        <PieChart width={ChartSize.width} height={ChartSize.height}>
+        <PieChart
+        //  width={ChartSize.width} height={ChartSize.height}
+        >
           <Pie
             data={emailData}
             dataKey="value"
@@ -437,8 +448,8 @@ export default function HarmonyDashboardCharts() {
           outerRadius="80%"
           barSize={10}
           data={ticketData}
-          width={ChartSize.width}
-          height={ChartSize.height}
+          // width={ChartSize.width}
+          // height={ChartSize.height}
         >
           <RadialBar
             minAngle={15}
@@ -474,8 +485,8 @@ export default function HarmonyDashboardCharts() {
           cy="50%"
           outerRadius="80%"
           data={serviceData}
-          width={ChartSize.width}
-          height={ChartSize.height}
+          // width={ChartSize.width}
+          // height={ChartSize.height}
         >
           <PolarGrid />
           <PolarAngleAxis dataKey="name" />
@@ -506,8 +517,8 @@ export default function HarmonyDashboardCharts() {
         <BarChart
           data={esrData}
           layout="vertical"
-          width={ChartSize.width}
-          height={ChartSize.height}
+          // width={ChartSize.width}
+          // height={ChartSize.height}
         >
           <XAxis type="number" />
           <YAxis dataKey="name" type="category" />

@@ -91,11 +91,11 @@ export default function DashboardOverview() {
                 }}
               >
                 <ResponsiveContainer width="100%" height="100%">
-                  <PieChart width={300} height={400}>
+                  <PieChart>
                     <Pie
                       data={overallStatus}
                       cx="50%"
-                      cy="50%"
+                      cy="100%"
                       startAngle={180}
                       endAngle={0}
                       innerRadius={100}
@@ -135,10 +135,10 @@ export default function DashboardOverview() {
                     color: "hsl(var(--primary))",
                   },
                 }}
-                className="h-[300px]"
+                className={"h-[200px] w-full"}
               >
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={serviceLevel} width={600} height={300}>
+                  <BarChart data={serviceLevel}>
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip content={<ChartTooltipContent />} />
