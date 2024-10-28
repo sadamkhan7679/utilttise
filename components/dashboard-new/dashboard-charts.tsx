@@ -39,7 +39,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import DashboardChartCard from "@/components/dashboard/chart-card";
-import { Component } from "@/components/dashboard-new/test-chart";
 
 const locationData = [
   { name: "New York", value: 5, fullMark: 10 },

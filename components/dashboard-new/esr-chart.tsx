@@ -1,7 +1,7 @@
 "use client";
 
 import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -20,55 +20,44 @@ import {
 
 export const description = "A mixed bar chart";
 
-const data = [
-  { name: "Jan", value: 400 },
-  { name: "Feb", value: 300 },
-  { name: "Mar", value: 600 },
-  { name: "Apr", value: 800 },
-  { name: "May", value: 500 },
-];
-
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+  { name: "IT Support", value: 10.5, fill: "var(--color-support)" },
+  { name: "Development", value: 8.0, fill: "var(--color-development)" },
+  { name: "Security", value: 6.0, fill: "var(--color-security)" },
+  { name: "Management", value: 4.5, fill: "var(--color-management)" },
+  { name: "Operations", value: 5.5, fill: "var(--color-operations)" },
 ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
+  support: {
+    label: "IT Support",
     color: "hsl(var(--chart-1))",
   },
-  safari: {
-    label: "Safari",
+  development: {
+    label: "Development",
     color: "hsl(var(--chart-2))",
   },
-  firefox: {
-    label: "Firefox",
+  security: {
+    label: "Security",
     color: "hsl(var(--chart-3))",
   },
-  edge: {
-    label: "Edge",
+  management: {
+    label: "Management",
     color: "hsl(var(--chart-4))",
   },
-  other: {
-    label: "Other",
+  operations: {
+    label: "Operations",
     color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig;
 
-export function Component() {
-  console.log("data", data);
-
+export function EsrChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Mixed</CardTitle>
+        <CardTitle>
+          Employee Satisfaction Rate (<span className="text-primary">ESR</span>)
+        </CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>
@@ -80,25 +69,23 @@ export function Component() {
             margin={{
               left: 0,
             }}
-            // width={600}
-            // height={300}
           >
             <YAxis
-              dataKey="browser"
+              dataKey="name"
               type="category"
               tickLine={false}
-              tickMargin={10}
+              // tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) =>
-                chartConfig[value as keyof typeof chartConfig]?.label
-              }
+              // tickFormatter={(value) =>
+              //   chartConfig[value as keyof typeof chartConfig]?.label
+              // }
             />
-            <XAxis dataKey="visitors" type="number" hide />
+            <XAxis dataKey="value" type="number" hide />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="visitors" layout="vertical" radius={5} />
+            <Bar dataKey="value" layout="vertical" radius={5} />
           </BarChart>
         </ChartContainer>
       </CardContent>

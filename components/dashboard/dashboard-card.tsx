@@ -1,4 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +14,7 @@ export type DashboardCardProps = {
   children: React.ReactNode;
   Icon?: React.ReactNode;
   className?: string;
+  footer?: React.ReactNode;
 };
 
 export const DashboardCard = ({
@@ -15,6 +22,7 @@ export const DashboardCard = ({
   children,
   Icon,
   className,
+  footer,
 }: DashboardCardProps) => {
   return (
     <Card className={cn("col-span-1", className)}>
@@ -26,7 +34,10 @@ export const DashboardCard = ({
           {Icon && <div>{Icon}</div>}
         </CardTitle>
       </CardHeader>
-      <CardContent className="text-white">{children}</CardContent>
+      <CardContent className="min-h-[300px] text-md w-full flex items-center justify-center">
+        {children}
+      </CardContent>
+      {footer && <CardFooter>{footer}</CardFooter>}
     </Card>
   );
 };

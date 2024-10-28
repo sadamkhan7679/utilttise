@@ -89,6 +89,7 @@ export default function DashboardOverview() {
                     color: "hsl(var(--primary))",
                   },
                 }}
+                className={"h-[200px] w-full"}
               >
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
