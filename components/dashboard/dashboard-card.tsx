@@ -17,12 +17,10 @@ export const DashboardCard = ({
   className,
 }: DashboardCardProps) => {
   return (
-    <Card className={cn("col-span-1 bg-gray-800", className)}>
+    <Card className={cn("col-span-1", className)}>
       <CardHeader>
         <CardTitle
-          className={
-            "text-xl font-bold flex justify-between items-center text-white"
-          }
+          className={"text-xl font-bold flex justify-between items-center"}
         >
           <div>{title}</div>
           {Icon && <div>{Icon}</div>}

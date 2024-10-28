@@ -22,6 +22,8 @@ import {
   SystemMetrics,
 } from "@/components/dashboard/charts";
 import { generateMockData } from "@/lib/mock-data-generator";
+import DashboardOverview from "@/components/dashboard-new/overview";
+import HarmonyDashboardCharts from "@/components/dashboard-new/dashboard-charts";
 
 const DashboardPage = () => {
   const [data, setData] = useState<SystemData | null>(null);
@@ -105,29 +107,33 @@ const DashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
-      <h1 className="text-3xl font-bold mb-8">
-        NetPulse360: Enterprise System Monitor
-      </h1>
-      <Header systemData={data.systemOverview} />
-      <PrimaryMetrics metrics={data.primaryMetrics} />
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-        <NetworkTraffic data={data.performanceMetrics.networkTraffic} />
-        <MemoryDistribution data={data.systemMetrics.memoryDistribution} />
-        <SystemMetrics data={data.systemMetrics.systemMetrics} />
-        <StorageUsage data={data.infrastructureMetrics.storageUsage} />
-        <CoreCPUUsage data={data.systemMetrics.cpuCoreUsage} />
-        <ErrorDistribution data={errorDistribution} />
-        <ServicesHealth data={serviceHealth} />
-        <SecurityEvents data={data.securityMetrics.securityEvents} />
-        <PerformanceMetrics data={data.performanceMetrics.performanceMetrics} />
-        <LoadBalancerMetrics data={data.performanceMetrics.loadBalancer} />
+      <DashboardOverview />
+      <div className="h-2 w-full bg-white my-5 rounded-2xl" />
+      <HarmonyDashboardCharts />
 
-        <DatabaseMetrics data={databaseMetrics} />
-        <SSLCertificates data={certificateStatus} />
-        <APILatency data={apiLatency} />
-        <CacheEfficiency data={cachingEfficiency} />
-        <BandwidthUsage data={data.infrastructureMetrics.bandwidthUsage} />
-      </div>
+      {/*<h1 className="text-3xl font-bold mb-8">*/}
+      {/*  NetPulse360: Enterprise System Monitor*/}
+      {/*</h1>*/}
+      {/*<Header systemData={data.systemOverview} />*/}
+      {/*<PrimaryMetrics metrics={data.primaryMetrics} />*/}
+      {/*<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">*/}
+      {/*  <NetworkTraffic data={data.performanceMetrics.networkTraffic} />*/}
+      {/*  <MemoryDistribution data={data.systemMetrics.memoryDistribution} />*/}
+      {/*  <SystemMetrics data={data.systemMetrics.systemMetrics} />*/}
+      {/*  <StorageUsage data={data.infrastructureMetrics.storageUsage} />*/}
+      {/*  <CoreCPUUsage data={data.systemMetrics.cpuCoreUsage} />*/}
+      {/*  <ErrorDistribution data={errorDistribution} />*/}
+      {/*  <ServicesHealth data={serviceHealth} />*/}
+      {/*  <SecurityEvents data={data.securityMetrics.securityEvents} />*/}
+      {/*  <PerformanceMetrics data={data.performanceMetrics.performanceMetrics} />*/}
+      {/*  <LoadBalancerMetrics data={data.performanceMetrics.loadBalancer} />*/}
+
+      {/*  <DatabaseMetrics data={databaseMetrics} />*/}
+      {/*  <SSLCertificates data={certificateStatus} />*/}
+      {/*  <APILatency data={apiLatency} />*/}
+      {/*  <CacheEfficiency data={cachingEfficiency} />*/}
+      {/*  <BandwidthUsage data={data.infrastructureMetrics.bandwidthUsage} />*/}
+      {/*</div>*/}
     </div>
   );
 };
