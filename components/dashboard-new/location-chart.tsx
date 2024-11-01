@@ -23,6 +23,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { IncidentReportDialog } from "../dashboard/accident";
 
 export const description = "A bar chart with a custom label";
 
@@ -104,6 +105,7 @@ export function LocationsChart() {
           </BarChart>
         </ChartContainer>
       </CardContent>
+
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
@@ -111,6 +113,8 @@ export function LocationsChart() {
         <div className="leading-none text-muted-foreground">
           Showing total visitors for the last 6 months
         </div>
+
+        <IncidentReportDialog />
       </CardFooter>
     </Card>
   );
