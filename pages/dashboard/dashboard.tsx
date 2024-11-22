@@ -1,7 +1,7 @@
 "use client";
 import DashboardOverview from "@/components/dashboard-new/overview";
 import { LocationsChart } from "@/components/dashboard-new/location-chart";
-import { ServersChart } from "@/components/dashboard-new/servers-chart";
+import { DevicesChart } from "@/components/dashboard-new/servers-chart";
 import { WorkStationsChart } from "@/components/dashboard-new/workstations-chart";
 import { UsersChart } from "@/components/dashboard-new/users-chart";
 import { CloudOpsChart } from "@/components/dashboard-new/cloud-ops-chart";
@@ -19,7 +19,7 @@ const DashboardPage = () => {
       <div className="h-2 w-full bg-white my-5 rounded-2xl" />
       <div className="grid grid-cols-4 gap-6">
         <LocationsChart />
-        <ServersChart />
+        <DevicesChart />
         <WorkStationsChart />
         <UsersChart />
         <CloudOpsChart />

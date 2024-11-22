@@ -1,15 +1,4 @@
-"use client";
-
-import { Server, TrendingUp } from "lucide-react";
-import {
-  Pie,
-  PieChart,
-  PolarAngleAxis,
-  PolarGrid,
-  Radar,
-  RadarChart,
-} from "recharts";
-
+import { Pie, PieChart } from "recharts";
 import {
   Card,
   CardContent,
@@ -26,73 +15,137 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useEffect, useState } from "react";
+import { getDeviceProfile } from "@/services/devices";
 
-export const description = "A radar chart";
+// Utility to generate a color based on device index
+const generateColor = (index: number): string => {
+  const colors = [
+    "hsl(var(--chart-1))",
+    "hsl(var(--chart-2))",
+    "hsl(var(--chart-3))",
+    "hsl(var(--chart-4))",
+    "hsl(var(--chart-5))",
+    "hsl(var(--chart-6))",
+  ];
+  return colors[index % colors.length] || "hsl(0, 70%, 50%)"; // Default color for more than 6 devices
+};
 
-const chartData = [
-  { server: "production", count: 275, fill: "var(--color-production)" },
-  { server: "staging", count: 200, fill: "var(--color-staging)" },
-  { server: "development", count: 187, fill: "var(--color-development)" },
-  { server: "testing", count: 173, fill: "var(--color-testing)" },
-  { server: "backup", count: 90, fill: "var(--color-backup)" },
-];
+const organizationId = "1215707";
 
-const chartConfig = {
-  count: {
-    label: "Server Count",
-  },
-  production: {
-    label: "Production Servers",
-    color: "hsl(var(--chart-1))",
-  },
-  staging: {
-    label: "Staging Servers",
-    color: "hsl(var(--chart-2))",
-  },
-  development: {
-    label: "Development Servers",
-    color: "hsl(var(--chart-3))",
-  },
-  testing: {
-    label: "Testing Servers",
-    color: "hsl(var(--chart-4))",
-  },
-  backup: {
-    label: "Backup Servers",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig;
+export function DevicesChart() {
+  const [deviceData, setDeviceData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [chartConfig, setChartConfig] = useState<ChartConfig | null>(null);
 
-export function ServersChart() {
+  useEffect(() => {
+    const fetchDeviceData = async () => {
+      try {
+        const data = await getDeviceProfile(organizationId);
+        // Mapping device data by model and serial
+        const deviceCountByModelAndSerial = data?.reduce(
+          (acc: any, item: any) => {
+            const model = item?.model;
+            const serial = item?.serial;
+            const key = `${model} - ${serial}`; // Combine model and serial for each entry
+            if (model && serial) {
+              acc[key] = acc[key] ? acc[key] + 1 : 1;
+            }
+            return acc;
+          },
+          {}
+        );
+
+        // Converting the object into an array format suitable for Pie chart
+        const modifiedData = Object.keys(deviceCountByModelAndSerial).map(
+          (key, index) => {
+            const [model, serial] = key.split(" - "); // Split model and serial back
+            const color = generateColor(index); // Generate color based on index
+            return {
+              name: `Model: '${model}', Serial: '${serial}'`, // Label format as requested
+              count: deviceCountByModelAndSerial[key],
+              fill: color, // Apply dynamic color
+              model: model, // Store the model for dynamic key
+            };
+          }
+        );
+
+        // Sort by count in descending order and take the top 6 entries
+        const top6Data = modifiedData
+          .sort((a, b) => b.count - a.count)
+          .slice(0, 6);
+        setDeviceData(top6Data);
+
+        // Dynamically generate chartConfig based on the fetched device models
+        const dynamicChartConfig: ChartConfig = {
+          count: {
+            label: "Connected Device",
+          },
+        };
+
+        // Dynamically add device keys (device1, device2, etc.)
+        top6Data.forEach((device, index) => {
+          dynamicChartConfig[`device${index + 1}`] = {
+            label: device.model,
+            color: device.fill,
+          };
+        });
+
+        setChartConfig(dynamicChartConfig);
+      } catch (error) {
+        console.error("Failed to fetch device data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDeviceData();
+  }, [organizationId]);
+
+  console.log("@@ deviceData", deviceData);
+
+  if (loading) return <div>Loading...</div>;
+
   return (
     <Card>
       <CardHeader className="items-center pb-4">
-        <CardTitle>Servers</CardTitle>
+        <CardTitle>Devices</CardTitle>
         <CardDescription>
-          Shows the distribution of servers across different environments
+          List the devices in an organization that have been assigned to a
+          network
         </CardDescription>
       </CardHeader>
       <CardContent className="pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[300px]"
-        >
-          <PieChart>
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Pie
-              data={chartData}
-              dataKey="count"
-              nameKey="server"
-              innerRadius={60}
-              outerRadius={80}
-              paddingAngle={2}
-            />
-            <ChartLegend
-              content={<ChartLegendContent nameKey="server" />}
-              className="-translate-y-2 flex-wrap gap-5 [&>*]:basis-1/4 [&>*]:justify-center text-black"
-            />
-          </PieChart>
-        </ChartContainer>
+        {chartConfig && (
+          <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square max-h-[300px]"
+          >
+            <PieChart>
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <Pie
+                data={deviceData} // Using modified data (top 6 devices)
+                dataKey="count"
+                nameKey="model" // Use the model as nameKey
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={2}
+              />
+              {/* Render dynamic device keys (device1, device2, etc.) in the legend */}
+              {deviceData.map((_, index: number) => {
+                const deviceKey = `device${index + 1}`;
+                console.log("@@ ", deviceKey);
+                return (
+                  <ChartLegend
+                    key={deviceKey}
+                    content={<ChartLegendContent nameKey={deviceKey} />}
+                    className="-translate-y-2 flex-wrap gap-5 [&>*]:basis-1/4 [&>*]:justify-center text-black"
+                  />
+                );
+              })}
+            </PieChart>
+          </ChartContainer>
+        )}
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm"></CardFooter>
     </Card>
