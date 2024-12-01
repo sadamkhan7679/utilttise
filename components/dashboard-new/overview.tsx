@@ -95,8 +95,8 @@ export default function DashboardOverview() {
                       cy="100%"
                       startAngle={180}
                       endAngle={0}
-                      innerRadius={100}
-                      outerRadius={140}
+                      innerRadius={70}
+                      outerRadius={110}
                       paddingAngle={5}
                       dataKey="value"
                     >

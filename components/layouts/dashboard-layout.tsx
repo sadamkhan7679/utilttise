@@ -159,6 +159,17 @@ const data = {
         { title: "Management", url: "#" },
       ],
     },
+    {
+      title: "Incident Management",
+      url: "incidents",
+      icon: Shield,
+      // items: [
+      //   { title: "Cloud Hosting", url: "#" },
+      //   { title: "Resource Scaling", url: "#" },
+      //   { title: "Monitoring", url: "#" },
+      //   { title: "Management", url: "#" },
+      // ],
+    },
   ],
   navSecondary: [
     { title: "Support", url: "#", icon: LifeBuoy },
@@ -177,14 +188,14 @@ export default function DashboardLayout({
     <SidebarProvider>
       <Sidebar
         collapsible="icon"
-        collapsed={isCollapsed}
-        onCollapsedChange={setIsCollapsed}
+        // collapsed={isCollapsed.toString()}
+        // onCollapsedChange={setIsCollapsed}
       >
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" asChild>
-                <a href="#">
+                <a href="/">
                   <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                     <Settings className="size-4" />
                   </div>
