@@ -27,7 +27,7 @@ export function CreateDialog() {
       <DialogTrigger asChild>
         <Button variant="outline">
           <Plus></Plus>
-          Button
+          Create Incident
         </Button>
       </DialogTrigger>
       <DialogContent className="min-w-[80vw]">
@@ -38,7 +38,7 @@ export function CreateDialog() {
           </DialogDescription>
         </DialogHeader>
         <ScrollArea className="h-[70vh] p-4">
-          <form>
+          <form className="p-3">
             <div className="w-full grid grid-cols-2 gap-4">
               <div className="grid grid-cols-1 gap-3">
                 <Select>
