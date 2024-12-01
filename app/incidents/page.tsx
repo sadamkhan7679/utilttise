@@ -11,6 +11,9 @@ import {
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Fragment } from "react";
 import { Badge } from "@/components/ui/badge";
+import { CreateDialog } from "@/components/incidents/create-dialog";
+
+
 
 function SeverityTag({ severity }) {
   if (severity === "High") {
@@ -222,7 +225,10 @@ const Incidents = () => {
 
   return (
     <Fragment>
-      <h2>Incidents</h2>
+      <div className="min-w-[80w] flex flex-row justify-between">
+        <h2>Incidents</h2>
+        <CreateDialog></CreateDialog>
+      </div>
       <ScrollArea className="h-[80vh] w-[80vw] rounded-md border p-4">
         <Table>
           <TableCaption>A list of your recent Incidents</TableCaption>
